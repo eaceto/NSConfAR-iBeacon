@@ -7,7 +7,7 @@
         <!--Main View Controller-->
         <scene sceneID="rV5-Y2-ghB">
             <objects>
-                <viewController id="rQl-PL-IFJ" customClass="EAMainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EAMainViewController" id="rQl-PL-IFJ" customClass="EAMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bfD-tQ-IfD"/>
                         <viewControllerLayoutGuide type="bottom" id="c4s-Xn-x5B"/>
@@ -44,6 +44,9 @@
                                                 <state key="normal">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="addBroadcaster:" destination="rQl-PL-IFJ" eventType="touchUpInside" id="Cyc-7M-6Mv"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>
@@ -62,15 +65,15 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="57" id="pUa-m2-Vfb">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="BroadcasterTableViewCell" rowHeight="57" id="pUa-m2-Vfb" customClass="EABroadcasterTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pUa-m2-Vfb" id="mil-we-wBy">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Beacon UDID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpD-DL-YSD">
-                                                    <rect key="frame" x="9" y="5" width="105" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Beacon Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpD-DL-YSD">
+                                                    <rect key="frame" x="9" y="5" width="245" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -85,9 +88,17 @@
                                                     <rect key="frame" x="262" y="12" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="beaconSwitchHasChanged:" destination="pUa-m2-Vfb" eventType="valueChanged" id="PcE-zP-yKW"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="beaconIDLabel" destination="1AN-3D-71N" id="IqR-q8-F8Z"/>
+                                            <outlet property="beaconName" destination="bpD-DL-YSD" id="Ncs-wp-gaa"/>
+                                            <outlet property="beaconSwitch" destination="iSg-7G-F8p" id="meQ-Bs-Xr6"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

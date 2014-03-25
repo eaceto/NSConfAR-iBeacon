@@ -61,4 +61,36 @@
     return [iBeacons count];
 }
 
+- (UITableViewCell*)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    EABroadcasterTableViewCell* cell = (EABroadcasterTableViewCell*)[_tableView dequeueReusableCellWithIdentifier:@"EABroadcasterTableViewCell"];
+    
+    if (cell == nil) {
+        cell = [[EABroadcasterTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"EABroadcasterTableViewCell"];
+    }
+    
+    [cell setBeacon:[iBeacons objectAtIndex:indexPath.row]];
+
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary* beacon = [iBeacons objectAtIndex:indexPath.row];
+}
+
+#pragma mark Cell Delegate
+- (void)onBroadcaster:(EABroadcasterTableViewCell*)cell stateChanged:(BOOL)poweredOn
+{
+    NSDictionary* beacon = [cell beacon];
+}
+
+
+#pragma mark Actions
+- (IBAction)addBroadcaster:(id)sender
+{
+    EAAddBroadcasterTableViewController* v = [[EAAddBroadcasterTableViewController alloc] initWithNibName:@"EAAddBroadcasterTableViewController" bundle:nil];
+    
+    [self presentViewController:v animated:YES completion:^(){}];
+}
+
 @end

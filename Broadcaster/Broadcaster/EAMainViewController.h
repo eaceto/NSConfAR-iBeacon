@@ -7,7 +7,10 @@
 //
 
 #import "EAFlipsideViewController.h"
+#import "EABroadcasterTableViewCell.h"
 
-@interface EAMainViewController : UIViewController <EAFlipsideViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+#import "EAAddBroadcasterTableViewController.h"
+
+@interface EAMainViewController : UIViewController <EAFlipsideViewControllerDelegate, UITableViewDataSource, UITableViewDelegate,EABroadcasterCellProtocol>
 
 @end
