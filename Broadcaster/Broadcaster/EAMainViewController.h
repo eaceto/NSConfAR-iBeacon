@@ -7,10 +7,12 @@
 //
 
 #import "EAFlipsideViewController.h"
-#import "EABroadcasterTableViewCell.h"
 
-#import "EAAddBroadcasterTableViewController.h"
+@import CoreBluetooth;
+@import CoreLocation;
 
-@interface EAMainViewController : UIViewController <EAFlipsideViewControllerDelegate, UITableViewDataSource, UITableViewDelegate,EABroadcasterCellProtocol>
+@interface EAMainViewController : UIViewController <EAFlipsideViewControllerDelegate, UITextFieldDelegate, CBPeripheralManagerDelegate>
+
+-(IBAction)onMeasuredPowerSliderChanged:(id)sender;
 
 @end

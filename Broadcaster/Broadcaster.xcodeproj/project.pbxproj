@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F31BE0418E1FA98008536C5 /* EAAddBroadcasterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F31BE0218E1FA98008536C5 /* EAAddBroadcasterTableViewController.m */; };
-		3F31BE0518E1FA98008536C5 /* EAAddBroadcasterTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F31BE0318E1FA98008536C5 /* EAAddBroadcasterTableViewController.xib */; };
-		3F31BE0918E1FB3B008536C5 /* EABroadcasterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F31BE0818E1FB3B008536C5 /* EABroadcasterTableViewCell.m */; };
 		3F53D56E18DC8DCD00600ADB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F53D56D18DC8DCD00600ADB /* Foundation.framework */; };
 		3F53D57018DC8DCD00600ADB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F53D56F18DC8DCD00600ADB /* CoreGraphics.framework */; };
 		3F53D57218DC8DCD00600ADB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F53D57118DC8DCD00600ADB /* UIKit.framework */; };
@@ -26,7 +23,6 @@
 		3F53D59A18DC8DCD00600ADB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F53D59818DC8DCD00600ADB /* InfoPlist.strings */; };
 		3F53D59C18DC8DCD00600ADB /* BroadcasterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F53D59B18DC8DCD00600ADB /* BroadcasterTests.m */; };
 		3F53D5A618DC8DD900600ADB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F53D5A518DC8DD900600ADB /* CoreBluetooth.framework */; };
-		3F53D5AB18DC92BD00600ADB /* EABeaconsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F53D5AA18DC92BD00600ADB /* EABeaconsHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,11 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3F31BE0118E1FA98008536C5 /* EAAddBroadcasterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAAddBroadcasterTableViewController.h; sourceTree = "<group>"; };
-		3F31BE0218E1FA98008536C5 /* EAAddBroadcasterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAAddBroadcasterTableViewController.m; sourceTree = "<group>"; };
-		3F31BE0318E1FA98008536C5 /* EAAddBroadcasterTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAAddBroadcasterTableViewController.xib; sourceTree = "<group>"; };
-		3F31BE0718E1FB3B008536C5 /* EABroadcasterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EABroadcasterTableViewCell.h; sourceTree = "<group>"; };
-		3F31BE0818E1FB3B008536C5 /* EABroadcasterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EABroadcasterTableViewCell.m; sourceTree = "<group>"; };
 		3F53D56A18DC8DCD00600ADB /* Broadcaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Broadcaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F53D56D18DC8DCD00600ADB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3F53D56F18DC8DCD00600ADB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -67,8 +58,6 @@
 		3F53D59918DC8DCD00600ADB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3F53D59B18DC8DCD00600ADB /* BroadcasterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BroadcasterTests.m; sourceTree = "<group>"; };
 		3F53D5A518DC8DD900600ADB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		3F53D5A918DC92BD00600ADB /* EABeaconsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EABeaconsHelper.h; sourceTree = "<group>"; };
-		3F53D5AA18DC92BD00600ADB /* EABeaconsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EABeaconsHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,25 +85,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3F31BE0018E1FA56008536C5 /* AddBroadcaster */ = {
-			isa = PBXGroup;
-			children = (
-				3F31BE0118E1FA98008536C5 /* EAAddBroadcasterTableViewController.h */,
-				3F31BE0218E1FA98008536C5 /* EAAddBroadcasterTableViewController.m */,
-				3F31BE0318E1FA98008536C5 /* EAAddBroadcasterTableViewController.xib */,
-			);
-			name = AddBroadcaster;
-			sourceTree = "<group>";
-		};
-		3F31BE0618E1FB2C008536C5 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				3F31BE0718E1FB3B008536C5 /* EABroadcasterTableViewCell.h */,
-				3F31BE0818E1FB3B008536C5 /* EABroadcasterTableViewCell.m */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
 		3F53D56118DC8DCD00600ADB = {
 			isa = PBXGroup;
 			children = (
@@ -149,9 +119,6 @@
 		3F53D57318DC8DCD00600ADB /* Broadcaster */ = {
 			isa = PBXGroup;
 			children = (
-				3F31BE0618E1FB2C008536C5 /* Cells */,
-				3F31BE0018E1FA56008536C5 /* AddBroadcaster */,
-				3F53D5A718DC92A500600ADB /* Helpers */,
 				3F53D57C18DC8DCD00600ADB /* EAAppDelegate.h */,
 				3F53D57D18DC8DCD00600ADB /* EAAppDelegate.m */,
 				3F53D57F18DC8DCD00600ADB /* Main.storyboard */,
@@ -192,15 +159,6 @@
 				3F53D59818DC8DCD00600ADB /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3F53D5A718DC92A500600ADB /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				3F53D5A918DC92BD00600ADB /* EABeaconsHelper.h */,
-				3F53D5AA18DC92BD00600ADB /* EABeaconsHelper.m */,
-			);
-			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,7 +241,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F31BE0518E1FA98008536C5 /* EAAddBroadcasterTableViewController.xib in Resources */,
 				3F53D58918DC8DCD00600ADB /* Images.xcassets in Resources */,
 				3F53D57818DC8DCD00600ADB /* InfoPlist.strings in Resources */,
 				3F53D58118DC8DCD00600ADB /* Main.storyboard in Resources */,
@@ -305,11 +262,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F31BE0418E1FA98008536C5 /* EAAddBroadcasterTableViewController.m in Sources */,
-				3F53D5AB18DC92BD00600ADB /* EABeaconsHelper.m in Sources */,
 				3F53D58418DC8DCD00600ADB /* EAMainViewController.m in Sources */,
 				3F53D57E18DC8DCD00600ADB /* EAAppDelegate.m in Sources */,
-				3F31BE0918E1FB3B008536C5 /* EABroadcasterTableViewCell.m in Sources */,
 				3F53D58718DC8DCD00600ADB /* EAFlipsideViewController.m in Sources */,
 				3F53D57A18DC8DCD00600ADB /* main.m in Sources */,
 			);
