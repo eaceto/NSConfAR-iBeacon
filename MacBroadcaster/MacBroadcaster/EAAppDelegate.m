@@ -10,14 +10,14 @@
 
 @implementation EAAppDelegate
 
-
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     _manager = [[CBPeripheralManager alloc] initWithDelegate:self
                                                        queue:nil];
     
     [_powerButton setEnabled:NO];
+    
+    [self performSelector:@selector(checkAdvertising:) withObject:nil afterDelay:1.0];
 }
 
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
@@ -27,6 +27,15 @@
     if ([peripheral state] == CBPeripheralManagerStatePoweredOn) {
         [_powerButton setEnabled:YES];
     }
+}
+
+-(void)checkAdvertising:(id)i
+{
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        [_advertisingButton setState:[_manager isAdvertising]];
+    });
+    
+    [self performSelector:@selector(checkAdvertising:) withObject:nil afterDelay:1.0];
 }
 
 - (void)startBroadcasting
@@ -70,6 +79,8 @@
         [_manager stopAdvertising];
     }
 }
+
+
 
 
 

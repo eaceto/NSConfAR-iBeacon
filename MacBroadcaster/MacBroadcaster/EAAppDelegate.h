@@ -16,6 +16,6 @@
 @property (nonatomic,strong) CBPeripheralManager *manager;
 @property (assign) IBOutlet NSWindow *window;
 
-@property (nonatomic, strong) IBOutlet NSButton* powerButton;
+@property (nonatomic, strong) IBOutlet NSButton* powerButton, *advertisingButton;
 
 @end

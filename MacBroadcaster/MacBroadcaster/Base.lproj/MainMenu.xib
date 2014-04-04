@@ -13,6 +13,7 @@
         <customObject id="-3" userLabel="Application"/>
         <customObject id="Voe-Tx-rLC" customClass="EAAppDelegate">
             <connections>
+                <outlet property="advertisingButton" destination="CiS-yH-FM8" id="OsG-bA-dgK"/>
                 <outlet property="powerButton" destination="b8f-W7-b9O" id="PIA-yZ-OlV"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
@@ -677,7 +678,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b8f-W7-b9O">
-                        <rect key="frame" x="281" y="13" width="103" height="18"/>
+                        <rect key="frame" x="281" y="12" width="103" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Broadcasting" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="U4T-Lq-13m">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -714,6 +715,14 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CiS-yH-FM8">
+                        <rect key="frame" x="155" y="12" width="93" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Advertising" bezelStyle="regularSquare" imagePosition="left" enabled="NO" refusesFirstResponder="YES" inset="2" id="wfB-ez-sk3">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
                 </subviews>
             </view>
         </window>
