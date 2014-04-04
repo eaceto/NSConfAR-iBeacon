@@ -13,12 +13,15 @@
 
 @protocol EALoginProtocol <NSObject>
 
--(void) didLoginWithUsername:(NSString*)username;
+-(void) didLoginWithUsername:(NSString*)username name:(NSString*)name account:(ACAccount*)account;
 
 @end
 
 @interface EALoginTableViewController : UITableViewController
+{
+    id<EALoginProtocol> delegate;    
+}
 
 @property (nonatomic, strong) IBOutlet UITableView* accountsTableView;
-
+@property (assign) id<EALoginProtocol> delegate;
 @end

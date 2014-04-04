@@ -504,6 +504,7 @@
 				3FA762A018E4EF15005474AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FA762A118E4EF15005474AA /* Build configuration list for PBXNativeTarget "NSConfARGTests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +513,7 @@
 				3FA762A318E4EF15005474AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

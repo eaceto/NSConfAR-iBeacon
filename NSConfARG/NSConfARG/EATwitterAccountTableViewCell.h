@@ -13,5 +13,8 @@
 @property (nonatomic, strong) IBOutlet UILabel* displayNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel* userNameLabel;
 @property (nonatomic, strong) IBOutlet UIImageView* profileImageView;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* profileImageLoadingView;
+
+-(void)setProfileImage:(UIImage *)aProfileImage;
 
 @end

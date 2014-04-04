@@ -25,6 +25,7 @@
 
 @implementation EALoginTableViewController
 @synthesize accountsTableView;
+@dynamic delegate;
 
 - (void)viewDidLoad
 {
@@ -47,6 +48,11 @@
     [self requestTwitterAccounts];
 }
 
+- (void)setDelegate:(id<EALoginProtocol>)aDelegate
+{
+    delegate = aDelegate;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -54,7 +60,8 @@
 }
 
 #pragma mark - Social
-- (void)requestTwitterAccounts {
+- (void)requestTwitterAccounts
+{
     
     ACAccountType* accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError* error){
@@ -72,15 +79,23 @@
                 [accountsTableView reloadData];            
             });
         }
+        
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            [loadingView stopAnimating];
+        });
     }];
 }
 
-- (void)showPermissionDenied {
-    NSLog(@"Permission Denied");
+- (void)showPermissionDenied
+{
+    [[[UIAlertView alloc]initWithTitle:@"NSConfARG" message:@"Por favor, habilite los permisos necesarios para que esta app pueda acceder a sus cuentas de Twitter." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
 }
 
-- (void)showError:(NSError*)error {
-    NSLog(@"error %@",error);
+- (void)showError:(NSError*)error
+{
+    NSString* msg = [NSString stringWithFormat:@"Ups... ha ocurrido un error: %@",error == nil ?@"Error desconocido":[error localizedDescription]];
+    
+    [[[UIAlertView alloc]initWithTitle:@"NSConfARG" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
 }
 
 #pragma mark Table View Delegate
@@ -95,54 +110,54 @@
     
     
     NSString* username = [account username];
-    NSString* display_name = [_usernameCache objectForKey:username];
-    
     if ([username rangeOfString:@"@"].location == NSNotFound) username = [NSString stringWithFormat:@"@%@",[account username]];
     
     [[cell userNameLabel] setText:username];
 
 
-    SLRequest *fetchAdvancedUserProperties  = [SLRequest requestForServiceType:SLServiceTypeTwitter
-                                                                 requestMethod:SLRequestMethodGET
-                                                                           URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/users/show.json"]
-                                                                    parameters:[NSDictionary dictionaryWithObjectsAndKeys:username, @"screen_name", nil]];
+    NSString* display_name = [_usernameCache objectForKey:username];
     
-    [fetchAdvancedUserProperties setAccount:account];
-    
-    [fetchAdvancedUserProperties performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+    if (display_name == nil) {
+        SLRequest *fetchAdvancedUserProperties  = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                                     requestMethod:SLRequestMethodGET
+                                                                               URL:[NSURL URLWithString:@"https://api.twitter.com/1.1/users/show.json"]
+                                                                        parameters:[NSDictionary dictionaryWithObjectsAndKeys:username, @"screen_name", nil]];
         
-        NSLog(@"Code %ld - %@ - %@",[urlResponse statusCode],urlResponse,[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+        [fetchAdvancedUserProperties setAccount:account];
         
-        if ([urlResponse statusCode] == 200) {
-            NSError *error;
-            id userInfo = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
-            if (userInfo != nil) {
-                [_usernameCache setObject:[userInfo valueForKey:@"name"] forKey:username];
-                
-                @try {
-                    NSString* _profileImageURL = [userInfo valueForKey:@"profile_image_url_https"];
-                    if (_profileImageURL) {
-                        _profileImageURL = [_profileImageURL stringByReplacingOccurrencesOfString:@"_normal" withString:@"_bigger"];
-                        
-                        [imageDic setObject:_profileImageURL forKey:username];
-                    }
-                }
-                @catch (NSException *exception) {
-
-                }
-                @finally {
+        [fetchAdvancedUserProperties performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+            
+            if ([urlResponse statusCode] == 200) {
+                NSError *error;
+                id userInfo = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+                if (userInfo != nil) {
+                    [_usernameCache setObject:[userInfo valueForKey:@"name"] forKey:username];
                     
-                }
-                
-                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0ul);
-                dispatch_async(queue, ^{
-                    dispatch_sync(dispatch_get_main_queue(), ^{
-                        [accountsTableView reloadData];
+                    @try {
+                        NSString* _profileImageURL = [userInfo valueForKey:@"profile_image_url_https"];
+                        if (_profileImageURL) {
+                            _profileImageURL = [_profileImageURL stringByReplacingOccurrencesOfString:@"_normal" withString:@"_bigger"];
+                            
+                            [imageDic setObject:_profileImageURL forKey:username];
+                        }
+                    }
+                    @catch (NSException *exception) {
+                        
+                    }
+                    @finally {
+                        
+                    }
+                    
+                    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0ul);
+                    dispatch_async(queue, ^{
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            [accountsTableView reloadData];
+                        });
                     });
-                });
+                }
             }
-        }
-    }];
+        }];
+    }
     
     NSString* _profileImageURL = [imageDic objectForKey:username];
     UIImage* _profileImage = [_imageCache objectForKey:username];
@@ -157,7 +172,7 @@
                 UIImage* image = [UIImage imageWithData:data];
                 if (image) {
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        [_imageCache setObject:image forKey:account.username];
+                        [_imageCache setObject:image forKey:username];
                         [accountsTableView reloadData];
                     });
                 }
@@ -172,28 +187,45 @@
         });
     }
     
-    
     if (display_name == nil) {
         display_name = @"loading...";
     }
     [[cell displayNameLabel] setText:display_name];
     
-    
+    [cell setProfileImage:_profileImage];
+
     
     return cell;
 }
 
 #pragma mark Table View Datasource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     if (accounts == nil)  return 0;
     return [accounts count];
 }
 
-- (NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+- (NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
     if (didFinishedLoading && (accounts == nil || [accounts count] == 0)) {
         return @"No hay cuentas de Twitter configuradas.";
     }
     return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ACAccount* account = [accounts objectAtIndex:indexPath.row];
+    
+    NSString* username = [account username];
+    if ([username rangeOfString:@"@"].location == NSNotFound) username = [NSString stringWithFormat:@"@%@",[account username]];
+    
+    NSString* display_name = [_usernameCache objectForKey:username];
+    if (display_name == nil) display_name = username;
+    
+    [delegate didLoginWithUsername:username name:display_name account:account];
+
+    [self dismissViewControllerAnimated:YES completion:^(){}];
 }
 
 @end

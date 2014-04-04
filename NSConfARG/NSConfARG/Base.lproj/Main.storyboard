@@ -42,9 +42,19 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aún no ha realizado un check-in en NSConf Argentina. Por favor, abra esta aplicación cuando ingrese a la sala de conferencias." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="hQ1-a2-Zzl">
+                                <rect key="frame" x="35" y="85" width="250" height="170"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="messageLabel" destination="hQ1-a2-Zzl" id="sdz-Td-aNJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4L-l5-tyG" sceneMemberID="firstResponder"/>
             </objects>
@@ -69,7 +79,7 @@
                                         <navigationItem title="Seleccione una cuenta" id="vWH-JF-xCc"/>
                                     </items>
                                 </navigationBar>
-                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Mfn-Ci-kWl">
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Mfn-Ci-kWl">
                                     <rect key="frame" x="289" y="32" width="20" height="20"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
@@ -102,10 +112,15 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="lbO-da-Zog">
+                                            <rect key="frame" x="21" y="20" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="displayNameLabel" destination="vTp-rv-hhm" id="RsL-2d-KgL"/>
+                                    <outlet property="profileImageLoadingView" destination="lbO-da-Zog" id="0SU-xL-7Dx"/>
                                     <outlet property="profileImageView" destination="SJ1-D2-fJu" id="dVa-Ri-U5c"/>
                                     <outlet property="userNameLabel" destination="AQm-Ug-V6y" id="L76-qI-v7L"/>
                                 </connections>
@@ -118,6 +133,7 @@
                     </tableView>
                     <connections>
                         <outlet property="accountsTableView" destination="A7e-oh-25N" id="pfk-zA-q79"/>
+                        <outlet property="loadingView" destination="Mfn-Ci-kWl" id="pgD-ZF-6Pw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bde-bM-6td" userLabel="First Responder" sceneMemberID="firstResponder"/>

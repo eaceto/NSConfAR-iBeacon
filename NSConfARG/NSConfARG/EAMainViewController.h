@@ -9,6 +9,11 @@
 #import "EAFlipsideViewController.h"
 #import "EALoginTableViewController.h"
 
-@interface EAMainViewController : UIViewController <EAFlipsideViewControllerDelegate,EALoginProtocol>
+#import <CoreLocation/CoreLocation.h>
+
+
+@interface EAMainViewController : UIViewController <EAFlipsideViewControllerDelegate,EALoginProtocol, CLLocationManagerDelegate>
+
+@property (nonatomic, strong) CLLocationManager* locationManager;
 
 @end

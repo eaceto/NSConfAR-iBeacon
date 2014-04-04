@@ -31,4 +31,17 @@
     // Configure the view for the selected state
 }
 
+-(void)setProfileImage:(UIImage *)aProfileImage
+{
+    if (aProfileImage == nil) {
+        [_profileImageLoadingView setHidden:NO];
+        [_profileImageView setHidden:YES];
+    }
+    else {
+        [_profileImageLoadingView setHidden:YES];
+        [_profileImageView setImage:aProfileImage];
+        [_profileImageView setHidden:NO];
+    }
+}
+
 @end
