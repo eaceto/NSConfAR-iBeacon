@@ -10,10 +10,14 @@
 
 @implementation EAAppDelegate
 
+
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     _manager = [[CBPeripheralManager alloc] initWithDelegate:self
                                                        queue:nil];
+    
+    [_powerButton setEnabled:NO];
 }
 
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
@@ -21,7 +25,7 @@
     NSLog(@"peripheralManagerDidUpdateState: %@",peripheral);
     
     if ([peripheral state] == CBPeripheralManagerStatePoweredOn) {
-        [self startBroadcasting];
+        [_powerButton setEnabled:YES];
     }
 }
 
@@ -55,7 +59,17 @@
     return [NSDictionary dictionaryWithObject:advertisement forKey:beaconKey];
 }
 
-
+- (IBAction)onPowerButtonChanged:(id)sender
+{
+    if ([_powerButton state] == YES)
+    {
+        [self startBroadcasting];
+    }
+    else
+    {
+        [_manager stopAdvertising];
+    }
+}
 
 
 

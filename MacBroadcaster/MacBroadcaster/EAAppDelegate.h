@@ -9,10 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import <IOBluetooth/IOBluetooth.h>
 
+
 @interface EAAppDelegate : NSObject <CBPeripheralManagerDelegate, NSApplicationDelegate>
 
 
 @property (nonatomic,strong) CBPeripheralManager *manager;
 @property (assign) IBOutlet NSWindow *window;
+
+@property (nonatomic, strong) IBOutlet NSButton* powerButton;
 
 @end
