@@ -13,7 +13,9 @@
 
 
 @interface EAMainViewController : UIViewController <EAFlipsideViewControllerDelegate,EALoginProtocol, CLLocationManagerDelegate>
-
+{
+    CLLocationManager* locationManager;
+}
 @property (nonatomic, strong) CLLocationManager* locationManager;
 
 @end
