@@ -54,7 +54,7 @@
 
 - (void)showInsideRoomMessage
 {
-    [messageLabel setText:@"Gracias por participar de NSConf Argentina. Puede seguirnos en Twitter en @nsconfarg y con el hashtag #NSConfARG"];
+    [messageLabel setText:@"Gracias por participar de NSConf Argentina. Puede seguirnos en Twitter en @NSConfArg y con el hashtag #NSConfArg"];
 }
 
 -(void)onLocalNotificationReceived:(NSNotification*)notification
@@ -185,6 +185,11 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
     NSLog(@"error: %@",error);
 }
 
+- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
+{
+    // ask in/out
+}
+
 - (void)locationManager:(CLLocationManager *)manager
          didEnterRegion:(CLRegion *)region
 {
@@ -193,7 +198,7 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
     if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
         [self.locationManager startRangingBeaconsInRegion:beaconRegion];
     }
-    else {
+    else if ([self hasBeenDetectedInsideConferenceRoom] == NO){
         UILocalNotification* notification = [[UILocalNotification alloc] init];
         
         notification.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
@@ -303,7 +308,7 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
                             dispatch_async(dispatch_get_main_queue(), ^(){
                                 [waitForAutomaticCheckinView setHidden:YES];
                                 
-                                [[[UIAlertView alloc] initWithTitle:@"NSConfARG" message:@"Ha realizado check-in automaticamente! Gracias!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];                                
+                                [[[UIAlertView alloc] initWithTitle:@"NSConfArg" message:@"Ha realizado check-in automaticamente! Gracias!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
                             });
                         }
                     }
@@ -318,5 +323,6 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
         }
     });
 }
+
 
 @end

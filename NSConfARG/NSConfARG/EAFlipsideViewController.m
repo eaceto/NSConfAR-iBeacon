@@ -39,4 +39,15 @@
     [self.delegate flipsideViewControllerDidFinish:self];
 }
 
+- (IBAction)cleanPrefs:(id)sender
+{
+    NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
+    [defs removeObjectForKey:@"identifier"];
+    [defs removeObjectForKey:@"username"];
+    [defs removeObjectForKey:@"name"];        
+    [defs removeObjectForKey:@"didCheckin"];
+    [defs removeObjectForKey:@"checkin"];
+}
+
+
 @end
