@@ -59,6 +59,7 @@
 
 -(void)onLocalNotificationReceived:(NSNotification*)notification
 {
+    [self saveCheckInState];
     [self performCheckin];
 }
 
@@ -92,6 +93,9 @@
         // Register for iBeacon region
         [locationManager startMonitoringForRegion:beaconRegion];
     }
+    
+    // in case we are inside the region
+    [locationManager requestStateForRegion:beaconRegion];
 }
 
 - (BOOL) isLoggedIn
@@ -165,9 +169,7 @@
             
             insideRoom = YES;
             
-            NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
-            [defs setObject:[NSNumber numberWithBool:YES] forKey:@"checkin"];
-            [defs synchronize];
+            [self saveCheckInState];
             
             dispatch_async(dispatch_get_main_queue(), ^() {
                 [self performCheckin];
@@ -188,6 +190,20 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
     // ask in/out
+    NSLog(@"%@ vs %@",region.identifier, beaconRegion.identifier);
+    NSLog(@"%i",[region.identifier compare:beaconRegion.identifier] == NSOrderedSame);
+    NSLog(@"%i",state == CLRegionStateInside);
+    if ([region.identifier compare:beaconRegion.identifier] == NSOrderedSame && state == CLRegionStateInside) {
+        if (insideRoom == NO) {
+            insideRoom = YES;
+            
+            [self saveCheckInState];
+            
+            dispatch_async(dispatch_get_main_queue(), ^() {
+                [self performCheckin];
+            });
+        }
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -218,19 +234,22 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
     NSLog(@"stopRangingBeaconsInRegion");
 }
 
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
+{
+    // in case we are inside the region
+    [manager requestStateForRegion:beaconRegion];
+}
+
 #pragma mark Automatic Checkin
 -(void) performCheckin
 {
     insideRoom = YES;
-    
-    NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
-    [defs setObject:[NSNumber numberWithBool:YES] forKey:@"checkin"];
-    [defs synchronize];
-    
+
     dispatch_async(dispatch_get_main_queue(), ^(){
         [self showInsideRoomMessage];
     });
     @try {
+        NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
         NSString* accountIdentifier = [defs objectForKey:@"identifier"];
         ACAccountStore* accountStore = [[ACAccountStore alloc] init];
         ACAccountType* accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
@@ -325,4 +344,10 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
 }
 
 
+-(void)saveCheckInState
+{
+    NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
+    [defs setObject:[NSNumber numberWithBool:YES] forKey:@"checkin"];
+    [defs synchronize];
+}
 @end

@@ -47,6 +47,7 @@
     [defs removeObjectForKey:@"name"];        
     [defs removeObjectForKey:@"didCheckin"];
     [defs removeObjectForKey:@"checkin"];
+    [defs synchronize];
 }
 
 
