@@ -1,4 +1,6 @@
-NSConfAR-iBeacon
+NSConf Argentina
 ================
+iBeacons
+--------
 
-iBeacon projects for the NSConfAR
+Proyectos complementarios de mi charla sobre iBeacons en el NSConf Argentina 2014.
