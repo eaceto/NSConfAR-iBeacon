@@ -283,7 +283,7 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
 - (void)sendCheckInTweetWithAccount:(ACAccount*)anAccount
 {
     NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
-    [defs setObject:[NSNumber numberWithBool:NO] forKey:@"didCheckin"];
+    [defs setObject:[NSNumber numberWithBool:YES] forKey:@"didCheckin"];
     [defs synchronize];
     
     dispatch_async(dispatch_get_main_queue(), ^(){
